@@ -22,6 +22,8 @@ set /p stream=Input MPD URL :
 yt-dlp --external-downloader aria2c --allow-unplayable-formats -F "%stream%" > formatid.txt
 
 echo.
+echo ID's have been exported to formatid.txt (Open with Notepad++) to check ID's
+echo.
 
 set /p video=Video Quality ID : 
 
