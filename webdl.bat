@@ -53,7 +53,7 @@ mp4decrypt.exe --key %id%:%key% %path%\Downloads\%folder%\encrypted.m4a %path%\D
 
 mp4decrypt.exe --key %id%:%key% %path%\Downloads\%folder%\encrypted.mp4 %path%\Downloads\%folder%\decrypted.mp4
 
-ffmpeg -hide_banner -i %path%\Downloads\%folder%\decrypted.mp4 -i %path%\Downloads\%folder%\decrypted.m4a -acodec copy -vcodec copy %path%\Downloads\%folder%.mp4
+mkvmerge.exe -o %path%\Downloads\%folder%.mkv %path%\Downloads\%folder%\decrypted.mp4 %path%\Downloads\%folder%\decrypted.m4a
 
 echo.
 echo Completed , Use Mediainfo or Play Video to check if the video is still encrypted.
