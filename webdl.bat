@@ -19,7 +19,7 @@ mkdir %path%\Downloads\%folder%
 
 set /p stream=Input MPD URL : 
 
-yt-dlp --external-downloader aria2c --allow-unplayable-formats -F "%stream%"
+yt-dlp --external-downloader aria2c --allow-unplayable-formats -F "%stream%" > formatid.txt
 
 echo.
 
