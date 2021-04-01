@@ -1,7 +1,7 @@
 # widevine-L3-WEB-DL-Script
 This is a batch script created to WEB-DL.
 
-* This is not the best way to do it but whatever. *
+** This is not the best way to do it but whatever. **
 
 Note : You need Old Version of Chrome v87 or below.  
 
