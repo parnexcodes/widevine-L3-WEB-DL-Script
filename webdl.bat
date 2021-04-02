@@ -72,7 +72,7 @@ echo Check Again and if it works then use this command.
 echo.
 echo Replace path.
 echo.
-echo ffmpeg -hide_banner -i path\decrypted.mp4 -i path\decrypted.m4a -acodec copy -vcodec copy path\filename.mp4
+echo mkvmerge.exe -o %path%\Downloads\%folder%.mkv %path%\Downloads\%folder%\decrypted.mp4 %path%\Downloads\%folder%\decrypted.m4a
 echo.
 echo Thanks for using.
 
