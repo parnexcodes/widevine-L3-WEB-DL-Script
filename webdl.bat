@@ -58,21 +58,7 @@ mp4decrypt.exe --key %id%:%key% %path%\Downloads\%folder%\encrypted.mp4 %path%\D
 mkvmerge.exe -o %path%\Downloads\%folder%.mkv %path%\Downloads\%folder%\decrypted.mp4 %path%\Downloads\%folder%\decrypted.m4a
 
 echo.
-echo Completed , Use Mediainfo or Play Video to check if the video is still encrypted.
-echo.
-echo If it's still encrypted , Delete decrypted.mp4 + decrypted.m4a and run these commands below.
-echo.
-echo Replace id with kid and key with key also Replace path.
-echo.
-echo mp4decrypt.exe --key id:key path\encrypted.m4a path\decrypted.m4a
-echo.
-echo mp4decrypt.exe --key id:key path\encrypted.mp4 path\decrypted.mp4
-echo.
-echo Check Again and if it works then use this command.
-echo.
-echo Replace path.
-echo.
-echo mkvmerge.exe -o %path%\Downloads\%folder%.mkv %path%\Downloads\%folder%\decrypted.mp4 %path%\Downloads\%folder%\decrypted.m4a
+echo Completed .........
 echo.
 echo Thanks for using.
 
