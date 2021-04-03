@@ -50,7 +50,7 @@ mp4decrypt.exe --key %id%:%key% Downloads\%folder%\encrypted.mp4 Downloads\%fold
 
 mkvmerge.exe -o Downloads\%folder%.mkv Downloads\%folder%\decrypted.mp4 Downloads\%folder%\decrypted.m4a
 
-//rmdir "Downloads\%folder%\"
+REM rmdir "Downloads\%folder%\"
 echo.
 echo Completed .........
 echo.
