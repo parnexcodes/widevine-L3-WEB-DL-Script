@@ -7,11 +7,11 @@ print("Required files : yt-dlp.exe, mkvmerge.exe, mp4decrypt.exe, aria2c.exe\n")
 filename = input("Enter the output file name (no spaces) : ")
 mpdurl = input("Enter MPD URL : ")
 
-os.system(f'yt-dlp --external-downloader aria2c --allow-unplayable-formats -F "{mpdurl}"')
+os.system(f'yt-dlp --external-downloader aria2c --allow-unplayable-formats --no-check-certificate -F "{mpdurl}"')
 
 vid_id = input("\nEnter Video ID : ")
 audio_id = input("Enter Audio ID : ")
-os.system(f'yt-dlp --external-downloader aria2c --allow-unplayable-formats -f {vid_id}+{audio_id} "{mpdurl}"')
+os.system(f'yt-dlp --external-downloader aria2c --allow-unplayable-formats --no-check-certificate -f {vid_id}+{audio_id} "{mpdurl}"')
 
 os.system("ren *.mp4 encrypted.mp4")
 os.system("ren *.m4a encrypted.m4a")
