@@ -15,13 +15,26 @@ os.system(f'yt-dlp --external-downloader aria2c --allow-unplayable-formats --no-
 
 os.system("ren *.mp4 encrypted.mp4")
 os.system("ren *.m4a encrypted.m4a")
+os.system('ren *.log key.txt')
 
-kid = input("\nEnter kid : ")
-key = input("Enter key : ")
+with open("key.txt", 'r') as f:
+    file = f.readlines()
+
+length = len(file)
+
+dict_key = {}
+dict_kid = {}
+
+for i in range(0, length):
+    key = file[i][60 : 92]
+    kid = file[i][98 : 130]
+
+    dict_key['key' + str(i)] = key
+    dict_kid['kid' + str(i)] = kid
 
 print("\nDecrypting .....")
-os.system(f'mp4decrypt.exe --key {kid}:{key} encrypted.m4a decrypted.m4a')
-os.system(f'mp4decrypt.exe --key {kid}:{key} encrypted.mp4 decrypted.mp4')
+os.system(f'mp4decrypt.exe --key {dict_kid["kid0"]}:{dict_key["key0"]} encrypted.m4a decrypted.m4a')
+os.system(f'mp4decrypt.exe --key {dict_kid["kid0"]}:{dict_key["key0"]} encrypted.mp4 decrypted.mp4')
 
 print("Merging .....")
 os.system(f'mkvmerge.exe -o {filename}.mkv decrypted.mp4 decrypted.m4a')
