@@ -21,13 +21,12 @@ with open("key.txt", 'r') as f:
     file = f.readlines()
 
 length = len(file)
-
-keys = ""
-for i in range(0, length):
-    key = file[i][60 : 92]
-    kid = file[i][98 : 130]
-
-    keys += f'--key {kid}:{key} '
+for x in str(length): # to use multiple encryption key in text
+    keys = ""
+    for i in range(0, length):
+        key = file[i][60 : 92]
+        kid = file[i][98 : 130]
+        keys += f'--key {kid}:{key} '
 
 print("\nDecrypting .....")
 os.system(f'mp4decrypt.exe {keys} encrypted.m4a decrypted.m4a')
