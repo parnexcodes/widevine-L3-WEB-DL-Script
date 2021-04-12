@@ -22,19 +22,16 @@ with open("key.txt", 'r') as f:
 
 length = len(file)
 
-dict_key = {}
-dict_kid = {}
-
+keys = ""
 for i in range(0, length):
     key = file[i][60 : 92]
     kid = file[i][98 : 130]
 
-    dict_key['key' + str(i)] = key
-    dict_kid['kid' + str(i)] = kid
+    keys += f'--key {kid}:{key} '
 
 print("\nDecrypting .....")
-os.system(f'mp4decrypt.exe --key {dict_kid["kid0"]}:{dict_key["key0"]} encrypted.m4a decrypted.m4a')
-os.system(f'mp4decrypt.exe --key {dict_kid["kid0"]}:{dict_key["key0"]} encrypted.mp4 decrypted.mp4')
+os.system(f'mp4decrypt.exe {keys} encrypted.m4a decrypted.m4a')
+os.system(f'mp4decrypt.exe {keys} encrypted.mp4 decrypted.mp4')
 
 print("Merging .....")
 os.system(f'mkvmerge.exe -o {filename}.mkv decrypted.mp4 decrypted.m4a')
