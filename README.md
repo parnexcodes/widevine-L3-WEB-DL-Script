@@ -1,6 +1,8 @@
 # widevine-L3-WEB-DL-Script
 This is a batch script created to WEB-DL.
 
+NOTE : As of June 1, 2021 it no longer works.
+
 Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in this batch script).
 
 ** This is not the best way to do it but whatever. **
