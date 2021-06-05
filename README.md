@@ -22,6 +22,4 @@ Make sure your file is in this format :
 
 If not remove the lines which are not in the format above.
 
-Thanks to u/Own_Western8448 for the original batch script.  
-
-Join my discord server for any questions : https://discord.gg/bHMvnWQuge
+Thanks to u/Own_Western8448 for the original batch script.
