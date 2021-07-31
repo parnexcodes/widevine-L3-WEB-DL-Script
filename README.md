@@ -22,7 +22,7 @@ Run `python webdl.py -h` once you get the **keys.txt** from Widevine Key Guesser
 
 Check the instructions and enter the mpd url , output.
 
-Example code : `py webdl.py -m "mprurl" -o test`
+Example code : `py webdl.py -m "mpdurl" -o test`
 
 -id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.)
 
