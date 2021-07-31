@@ -25,7 +25,7 @@ dirName = os.path.basename(dirPath)
 
 youtubedlexe = dirPath + '/binaries/yt-dlp.exe'
 aria2cexe = dirPath + '/binaries/aria2c.exe'
-mp4decryptexe = dirPath + '/binaries/mp4decrypt.exe'
+mp4decryptexe = dirPath + '/binaries/mp4decrypt_new.exe'
 mkvmergeexe = dirPath + '/binaries/mkvmerge.exe'
 SubtitleEditexe = dirPath + '/binaries/SubtitleEdit.exe'
 
@@ -60,8 +60,8 @@ for i in range(0, length):
     keys += f'--key {kid}:{key} '
 
 print("\nDecrypting .....")
-subprocess.run(f'{mp4decryptexe} {keys} encrypted.m4a decrypted.m4a', shell=True)
-subprocess.run(f'{mp4decryptexe} {keys} encrypted.mp4 decrypted.mp4', shell=True)
+subprocess.run(f'{mp4decryptexe} {keys} --show-progress encrypted.m4a decrypted.m4a', shell=True)
+subprocess.run(f'{mp4decryptexe} {keys} --show-progress encrypted.mp4 decrypted.mp4', shell=True)
 
 if args.subtitle:
     subprocess.run(f'aria2c.exe {subtitle}', shell=True)
