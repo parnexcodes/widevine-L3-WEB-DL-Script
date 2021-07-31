@@ -22,7 +22,9 @@ Open Developer Console and add this line in **filter** `content_key_decryption.j
 
 Right click on any line and click on **Save as**.
 
-**Screenshot** : ![alt text](https://i.imgur.com/yvMbFAq.png "image")
+**Screenshot** : 
+
+![alt text](https://i.imgur.com/yvMbFAq.png "image")
 
 Place the **.log** file in this **repo's folder**.
 
