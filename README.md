@@ -1,25 +1,31 @@
 # widevine-L3-WEB-DL-Script
-This is a batch script created to WEB-DL.
+This is a script created to WEB-DL L3 Widevine Content.
 
-NOTE : As of June 1, 2021 it no longer works.
+Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in this script).
 
-Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in this batch script).
+# Things Needed
 
-** This is not the best way to do it but whatever. **
+**Widevine Key Guesser** : <https://github.com/parnexcodes/WVGuesser>
 
-Note : You need Old Version of Chrome v87 or below.  
+- `pip install pyfiglet`
+- `pip install rich`
 
-Link for Widevine L3 Decrypter : https://anonfiles.com/x7I0p8m5p4/widevine-l3-decryptor-main_zip  
-You will need yt-dlp.exe , mp4decrypt.exe , mkvmerge.exe in the directory. 
+# How to use ?
 
-For keys , Download it like this : 
+Extract Widevine Key Guesser files in the same directory of this repo.
 
-![image](https://i.imgur.com/MruIE1C.png)
+Run **Widevine Key Guesser** (instructions on it's repo.)
 
-Make sure your file is in this format : 
+Run `python webdl.py -h` once you get the **keys.txt** from Widevine Key Guesser.
 
-![image1](https://i.imgur.com/2ix3SNW.png)
+Check the instructions and enter the mpd url , output.
 
-If not remove the lines which are not in the format above.
+Example code : `py webdl.py -m "mprurl" -o test`
 
-Thanks to u/Own_Western8448 for the original batch script.
+-id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.)
+
+![alt text](https://i.imgur.com/wc17Qjx.png "image")
+
+# Report Issues
+
+Open Issue on Github if you get any problem.
