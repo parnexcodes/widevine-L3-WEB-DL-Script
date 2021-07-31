@@ -45,7 +45,7 @@ else:
     subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'ba', '--fixup', 'never', mpdurl, '-o', 'encrypted.m4a', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
     subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'bv', '--fixup', 'never', mpdurl, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])    
 
-
+os.rename("*.log", "keys.txt")
 with open("keys.txt", 'r') as f:
     file = f.readlines()
 
@@ -53,8 +53,8 @@ length = len(file)
 
 keys = ""
 for i in range(0, length):
-    key = file[i][33 : 65]
-    kid = file[i][0 : 32]
+    kid = file[i][30 : 62]
+    key = file[i][63 : 95]
 
     keys += f'--key {kid}:{key} '
 
@@ -82,5 +82,8 @@ if delete_choice == 1:
     os.remove("encrypted.mp4")
     os.remove("decrypted.m4a")
     os.remove("decrypted.mp4")
+    os.remove("keys.txt")
+    os.remove("en.xml")    
+    os.remove("en.srt")
 else:
     pass
