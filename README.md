@@ -7,18 +7,20 @@ Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in
 
 # Things Needed
 
-**Widevine Key Guesser** : <https://github.com/parnexcodes/WVGuesser>
+**Widevine Key Guesser** : <https://github.com/parnexcodes/widevine-l3-guesser>
 
 - `pip install pyfiglet`
 - `pip install rich`
 
 # How to use ?
 
-Extract Widevine Key Guesser files in the same directory of this repo.
+Load the extension (link above)
 
-Run **Widevine Key Guesser** (instructions on it's repo.)
+Open the Widevine Protected DRM Stream , the extension will automatically download keys.txt file.
 
-Run `python webdl.py -h` once you get the **keys.txt** from Widevine Key Guesser.
+Place the keys.txt file in this repo's folder.
+
+Run `python webdl.py -h`
 
 Check the instructions and enter the mpd url , output.
 
