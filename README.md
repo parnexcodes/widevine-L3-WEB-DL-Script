@@ -1,6 +1,8 @@
 # widevine-L3-WEB-DL-Script
 This is a script created to WEB-DL L3 Widevine Content.
 
+Last Updated July 31, 2021.
+
 Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in this script).
 
 # Things Needed
@@ -20,7 +22,7 @@ Run `python webdl.py -h` once you get the **keys.txt** from Widevine Key Guesser
 
 Check the instructions and enter the mpd url , output.
 
-Example code : `py webdl.py -m "mprurl" -o test`
+Example code : `py webdl.py -m "mpdurl" -o test`
 
 -id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.)
 
