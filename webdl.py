@@ -60,8 +60,8 @@ for i in range(0, length):
     keys += f'--key {kid}:{key} '
 
 print("\nDecrypting .....")
-subprocess.run(f'{mp4decryptexe} {keys} --show-progress encrypted.m4a decrypted.m4a', shell=True)
-subprocess.run(f'{mp4decryptexe} {keys} --show-progress encrypted.mp4 decrypted.mp4', shell=True)
+subprocess.run(f'{mp4decryptexe} --show-progress {keys} encrypted.m4a decrypted.m4a', shell=True)
+subprocess.run(f'{mp4decryptexe} --show-progress {keys} encrypted.mp4 decrypted.mp4', shell=True)
 
 if args.subtitle:
     subprocess.run(f'aria2c.exe {subtitle}', shell=True)
