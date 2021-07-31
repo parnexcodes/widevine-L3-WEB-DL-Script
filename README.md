@@ -14,11 +14,11 @@ Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in
 
 # How to use ?
 
-Load the extension (link above)
+Load the **extension** (link above)
 
-Open the Widevine Protected DRM Stream , the extension will automatically download keys.txt file.
+Open the Widevine Protected DRM Stream , the **extension** will automatically download **keys.txt** file.
 
-Place the keys.txt file in this repo's folder.
+Place the **keys.txt** file in this **repo's folder**.
 
 Run `python webdl.py -h`
 
