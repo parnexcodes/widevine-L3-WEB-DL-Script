@@ -14,7 +14,7 @@ print("Required files : yt-dlp.exe, mkvmerge.exe, mp4decrypt.exe, aria2c.exe\n")
 arguments = argparse.ArgumentParser()
 arguments.add_argument("-m", "--video-link", dest="mpd", help="MPD url", required=True)
 arguments.add_argument("-o", '--output', dest="output", help="Specify output file name with no extension", required=True)
-arguments.add_argument("-id", dest="id", help="use if you want to manually enter video and audio id.")
+arguments.add_argument("-id", dest="id", action='store_true', help="use if you want to manually enter video and audio id.")
 arguments.add_argument("-s", dest="subtitle", help="enter subtitle url")
 args = arguments.parse_args()
 
@@ -31,7 +31,6 @@ SubtitleEditexe = dirPath + '/binaries/SubtitleEdit.exe'
 
 mpdurl = str(args.mpd)
 output = str(args.output)
-id = str(args.id)
 subtitle = str(args.subtitle)
 
 if args.id:
