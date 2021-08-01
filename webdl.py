@@ -45,22 +45,41 @@ else:
     subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'ba', '--fixup', 'never', mpdurl, '-o', 'encrypted.m4a', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
     subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'bv', '--fixup', 'never', mpdurl, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])    
 
-os.rename("*.log", "keys.txt")
-with open("keys.txt", 'r') as f:
-    file = f.readlines()
+def getkeys():
+    with open("keys.txt", 'r') as f:
+        file = f.readlines()
 
-length = len(file)
+    length = len(file)
 
-keys = ""
-for i in range(0, length):
-    kid = file[i][30 : 62]
-    key = file[i][63 : 95]
+    keys = ""
+    for i in range(0, length):
+        key = file[i][33 : 65]
+        kid = file[i][0 : 32]
 
-    keys += f'--key {kid}:{key} '
+        keys += f'--key {kid}:{key} '
+        return keys
+
+def getkeys1():
+    with open("keys (1).txt", 'r') as f:
+        file = f.readlines()
+
+    length = len(file)
+
+    keys = ""
+    for i in range(0, length):
+        key = file[i][33 : 65]
+        kid = file[i][0 : 32]
+
+        keys += f'--key {kid}:{key} '
+        return keys
 
 print("\nDecrypting .....")
-subprocess.run(f'{mp4decryptexe} --show-progress {keys} encrypted.m4a decrypted.m4a', shell=True)
-subprocess.run(f'{mp4decryptexe} --show-progress {keys} encrypted.mp4 decrypted.mp4', shell=True)
+try:
+    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys()} encrypted.m4a decrypted.m4a', shell=True)
+    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys()} encrypted.mp4 decrypted.mp4', shell=True)
+except:
+    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys1()} encrypted.m4a decrypted.m4a', shell=True)
+    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys1()} encrypted.mp4 decrypted.mp4', shell=True)    
 
 if args.subtitle:
     subprocess.run(f'aria2c.exe {subtitle}', shell=True)
