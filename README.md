@@ -34,6 +34,8 @@ or
 
 -id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.)
 
+### Subtitle part is bugged right now.
+
 ![alt text](https://i.imgur.com/wc17Qjx.png "image")
 
 # Report Issues
