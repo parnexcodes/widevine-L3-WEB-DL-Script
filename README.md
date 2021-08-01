@@ -20,6 +20,11 @@ Open the Widevine Protected DRM Stream , click on extension then click on **Down
 
 Place **keys.json** file inside this repo's folder.
 
+# Note
+
+You might need to update line **27** or **31** for some sites.
+It's a simple logic , you can figure it out yourself. <https://gist.github.com/parnexcodes/74fef2e33a2171031000a97c371a1a65>
+
 # Running the Script
 
 Run `python webdl.py -h`
