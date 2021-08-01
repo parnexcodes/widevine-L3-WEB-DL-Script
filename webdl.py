@@ -21,10 +21,15 @@ args = arguments.parse_args()
 
 with open("keys.json") as json_data:
     config = json.load(json_data)
-    json_mpd_url = config[0]['mpd_url']
-    keys = ""
-    for i in range(1, len(config)):
-        keys += f"--key {config[i]['kid']}:{config[i]['hex_key']} "
+    mpd_url = config[0]['mpd_url']
+    try:
+        keys = ""
+        for i in range(1, len(config)):
+            keys += f"--key {config[i]['kid']}:{config[i]['hex_key']} "
+    except:
+        keys = ""
+        for i in range(1, len(config)-1):
+            keys += f"--key {config[i]['kid']}:{config[i]['hex_key']} "
 
 currentFile = __file__
 realPath = os.path.realpath(currentFile)
