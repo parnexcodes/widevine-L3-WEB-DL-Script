@@ -7,7 +7,7 @@ Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in
 
 # Things Needed
 
-**Widevine Key Guesser** : <https://github.com/parnexcodes/widevine-l3-guesser>
+**Widevine Key Guesser** : <https://github.com/parnexcodes/widevine-l3-guesser-modified>
 
 - `pip install pyfiglet`
 - `pip install rich`
@@ -16,47 +16,9 @@ Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in
 
 Load the extension (link above)
 
-Open the Widevine Protected DRM Stream , the extension will automatically download **keys.txt** file.
+Open the Widevine Protected DRM Stream , click on extension then click on **Download**.
 
-For Websites like Amazon , the extension logs keys **2 times**.
-
-So the extension will download 2 key files. (Can be more for some sites)
-
-Place the **keys.txt** or **keys (1).txt** etc files in this repo's folder.
-
-# Note
-
-If you get more than 2 key files , there's two things you can do.
-
-### 1 - Copy Keys from other files and paste it in keys.txt
-
-### 2 - Edit some code in `webdl.py`
-
-You will have to make another **function** named 
-
-```
-def getkeys2():
-    with open("keys (2).txt", 'r') as f:
-        file = f.readlines()
-
-    length = len(file)
-
-    keys = ""
-    for i in range(0, length):
-        key = file[i][33 : 65]
-        kid = file[i][0 : 32]
-
-        keys += f'--key {kid}:{key} '
-    return keys
-```
-
-And then add another **except** block.
-
-```
-except:
-    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys2()} encrypted.m4a decrypted.m4a', shell=True)
-    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys2()} encrypted.mp4 decrypted.mp4', shell=True)
-```
+Place **keys.json** file inside this repo's folder.
 
 # Running the Script
 
@@ -64,7 +26,11 @@ Run `python webdl.py -h`
 
 Check the instructions and enter the mpd url , output.
 
-Example code : `py webdl.py -m "mpdurl" -o test`
+Example code : `py webdl.py -o test`
+
+or
+
+`py webdl.py -m "mpdurl" -o test` (In the new update , you don't have to enter the **mpd url** as it gets fetched through **extension**)
 
 -id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.)
 
