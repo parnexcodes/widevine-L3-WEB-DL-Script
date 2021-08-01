@@ -57,7 +57,7 @@ def getkeys():
         kid = file[i][0 : 32]
 
         keys += f'--key {kid}:{key} '
-        return keys
+    return keys
 
 def getkeys1():
     with open("keys (1).txt", 'r') as f:
@@ -71,7 +71,7 @@ def getkeys1():
         kid = file[i][0 : 32]
 
         keys += f'--key {kid}:{key} '
-        return keys
+    return keys
 
 print("\nDecrypting .....")
 try:

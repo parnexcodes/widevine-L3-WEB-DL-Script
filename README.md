@@ -47,7 +47,7 @@ def getkeys2():
         kid = file[i][0 : 32]
 
         keys += f'--key {kid}:{key} '
-        return keys
+    return keys
 ```
 
 And then add another **except** block.
