@@ -24,13 +24,10 @@ Place **keys.json** file inside this repo's folder.
 
 Run `python webdl.py -h`
 
-Check the instructions and enter the mpd url (optional), output.
-
 Example code : `py webdl.py -o test`
 
-or
-
-`py webdl.py -m "mpdurl" -o test` (In the new update , you don't have to enter the **mpd url** as it gets fetched through **extension**)
+### If you want to enter Your Own MPD URL -
+replace `mpd_url` key of **keys.json** file.
 
 -id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.)
 
