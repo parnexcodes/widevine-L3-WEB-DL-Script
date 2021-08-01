@@ -21,7 +21,7 @@ args = arguments.parse_args()
 
 with open("keys.json") as json_data:
     config = json.load(json_data)
-    mpd_url = config[0]['mpd_url']
+    json_mpd_url = config[0]['mpd_url']
     try:
         keys = ""
         for i in range(1, len(config)):
