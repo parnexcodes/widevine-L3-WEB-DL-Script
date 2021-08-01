@@ -14,19 +14,51 @@ Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in
 
 # How to use ?
 
-Load the **extension** (link above)
+Load the extension (link above)
 
-Open the Widevine Protected DRM Stream.
+Open the Widevine Protected DRM Stream , the extension will automatically download **keys.txt** file.
 
-Open Developer Console and add this line in **filter** `content_key_decryption.js`
+For Websites like Amazon , the extension logs keys **2 times**.
 
-Right click on any line and click on **Save as**.
+So the extension will download 2 key files. (Can be more for some sites)
 
-**Screenshot** : 
+Place the **keys.txt** or **keys (1).txt** etc files in this repo's folder.
 
-![alt text](https://i.imgur.com/yvMbFAq.png "image")
+# Note
 
-Place the **.log** file in this **repo's folder**.
+If you get more than 2 key files , there's two things you can do.
+
+### 1 - Copy Keys from other files and paste it in keys.txt
+
+### 2 - Edit some code in `webdl.py`
+
+You will have to make another **function** named 
+
+```
+def getkeys2():
+    with open("keys (2).txt", 'r') as f:
+        file = f.readlines()
+
+    length = len(file)
+
+    keys = ""
+    for i in range(0, length):
+        key = file[i][33 : 65]
+        kid = file[i][0 : 32]
+
+        keys += f'--key {kid}:{key} '
+        return keys
+```
+
+And then add another **except** block.
+
+```
+except:
+    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys2()} encrypted.m4a decrypted.m4a', shell=True)
+    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys2()} encrypted.mp4 decrypted.mp4', shell=True)
+```
+
+# Running the Script
 
 Run `python webdl.py -h`
 
