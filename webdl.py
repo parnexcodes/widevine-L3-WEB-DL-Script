@@ -1,4 +1,5 @@
 import os
+import json
 import subprocess
 import argparse
 import sys
@@ -12,11 +13,18 @@ print("by parnex")
 print("Required files : yt-dlp.exe, mkvmerge.exe, mp4decrypt.exe, aria2c.exe\n")
 
 arguments = argparse.ArgumentParser()
-arguments.add_argument("-m", "--video-link", dest="mpd", help="MPD url", required=True)
+arguments.add_argument("-m", "--video-link", dest="mpd", action='store_true', help="MPD url")
 arguments.add_argument("-o", '--output', dest="output", help="Specify output file name with no extension", required=True)
 arguments.add_argument("-id", dest="id", action='store_true', help="use if you want to manually enter video and audio id.")
 arguments.add_argument("-s", dest="subtitle", help="enter subtitle url")
 args = arguments.parse_args()
+
+with open("keys.json") as json_data:
+    config = json.load(json_data)
+    json_mpd_url = config[0]['mpd_url']
+    keys = ""
+    for i in range(1, len(config)):
+        keys += f"--key {config[i]['kid']}:{config[i]['hex_key']} "
 
 currentFile = __file__
 realPath = os.path.realpath(currentFile)
@@ -34,52 +42,33 @@ output = str(args.output)
 subtitle = str(args.subtitle)
 
 if args.id:
+    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-F', json_mpd_url])
+
+    vid_id = input("\nEnter Video ID : ")
+    audio_id = input("Enter Audio ID : ")
+    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', audio_id, '--fixup', 'never', json_mpd_url, '-o', 'encrypted.m4a', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
+    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', vid_id, '--fixup', 'never', json_mpd_url, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
+
+elif args.mpd:
+    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'ba', '--fixup', 'never', mpdurl, '-o', 'encrypted.m4a', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
+    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'bv', '--fixup', 'never', mpdurl, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])    
+
+elif args.mpd and args.id:
     subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-F', mpdurl])
 
     vid_id = input("\nEnter Video ID : ")
     audio_id = input("Enter Audio ID : ")
     subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', audio_id, '--fixup', 'never', mpdurl, '-o', 'encrypted.m4a', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
-    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', vid_id, '--fixup', 'never', mpdurl, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
+    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', vid_id, '--fixup', 'never', mpdurl, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])    
 
 else:
-    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'ba', '--fixup', 'never', mpdurl, '-o', 'encrypted.m4a', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
-    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'bv', '--fixup', 'never', mpdurl, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])    
+    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'ba', '--fixup', 'never', json_mpd_url, '-o', 'encrypted.m4a', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])
+    subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'bv', '--fixup', 'never', json_mpd_url, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])    
 
-def getkeys():
-    with open("keys.txt", 'r') as f:
-        file = f.readlines()
-
-    length = len(file)
-
-    keys = ""
-    for i in range(0, length):
-        key = file[i][33 : 65]
-        kid = file[i][0 : 32]
-
-        keys += f'--key {kid}:{key} '
-    return keys
-
-def getkeys1():
-    with open("keys (1).txt", 'r') as f:
-        file = f.readlines()
-
-    length = len(file)
-
-    keys = ""
-    for i in range(0, length):
-        key = file[i][33 : 65]
-        kid = file[i][0 : 32]
-
-        keys += f'--key {kid}:{key} '
-    return keys
 
 print("\nDecrypting .....")
-try:
-    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys()} encrypted.m4a decrypted.m4a', shell=True)
-    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys()} encrypted.mp4 decrypted.mp4', shell=True)
-except:
-    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys1()} encrypted.m4a decrypted.m4a', shell=True)
-    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys1()} encrypted.mp4 decrypted.mp4', shell=True)    
+subprocess.run(f'{mp4decryptexe} --show-progress {keys} encrypted.m4a decrypted.m4a', shell=True)
+subprocess.run(f'{mp4decryptexe} --show-progress {keys} encrypted.mp4 decrypted.mp4', shell=True)  
 
 if args.subtitle:
     subprocess.run(f'aria2c.exe {subtitle}', shell=True)
@@ -100,9 +89,7 @@ if delete_choice == 1:
     os.remove("encrypted.m4a")
     os.remove("encrypted.mp4")
     os.remove("decrypted.m4a")
-    os.remove("decrypted.mp4")
-    os.remove("keys.txt")
-    os.remove("en.xml")    
+    os.remove("decrypted.mp4")    
     os.remove("en.srt")
 else:
     pass
