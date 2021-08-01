@@ -24,7 +24,7 @@ Place **keys.json** file inside this repo's folder.
 
 Run `python webdl.py -h`
 
-Check the instructions and enter the mpd url , output.
+Check the instructions and enter the mpd url (optional), output.
 
 Example code : `py webdl.py -o test`
 
