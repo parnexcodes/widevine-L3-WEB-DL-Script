@@ -46,7 +46,7 @@ else:
     subprocess.run([youtubedlexe, '-k', '--allow-unplayable-formats', '--no-check-certificate', '-f', 'bv', '--fixup', 'never', mpdurl, '-o', 'encrypted.mp4', '--external-downloader', aria2cexe, '--external-downloader-args', '-x 16 -s 16 -k 1M'])    
 
 def getkeys():
-    with open("keys.txt", 'r') as f:
+    with open("keys (1).txt", 'r') as f:
         file = f.readlines()
 
     length = len(file)
