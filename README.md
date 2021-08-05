@@ -3,6 +3,10 @@ This is a script created to WEB-DL L3 Widevine Content.
 
 Last Updated July 31, 2021.
 
+# Use the branch below if you aren't able to modify the code according to your needs
+
+<https://github.com/parnexcodes/widevine-L3-WEB-DL-Script/tree/method-2>
+
 Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in this script).
 
 # Things Needed
