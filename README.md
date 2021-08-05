@@ -5,9 +5,11 @@ Last Updated July 31, 2021.
 
 Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in this script).
 
+# This branch follows another approach which is better in my opinion.
+
 # Things Needed
 
-**Widevine Key Guesser** : <https://github.com/parnexcodes/widevine-l3-guesser-modified>
+**Widevine Key Guesser** : <https://github.com/parnexcodes/widevine-l3-guesser>
 
 - `pip install pyfiglet`
 - `pip install rich`
@@ -16,25 +18,55 @@ Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in
 
 Load the extension (link above)
 
-Open the Widevine Protected DRM Stream , click on extension then click on **Download**.
+Open the **Widevine Protected DRM Stream** , the extension will automatically download **keys.txt** file.
 
-Place **keys.json** file inside this repo's folder.
+For Websites like **Amazon** , the extension logs keys **2 times**.
+
+So the extension will download 2 key files. (Can be more for some sites)
+
+Place the **keys.txt** and **keys (1).txt** etc files in this repo's folder.
 
 # Note
 
-You might need to update line **27** or **31** for some sites.
-It's a simple logic , you can figure it out yourself. <https://gist.github.com/parnexcodes/74fef2e33a2171031000a97c371a1a65>
+If you get more than 2 key files , there's two things you can do.
+
+### 1 - Copy Keys from other files and paste it in keys.txt
+
+### 2 - Edit some code in `webdl.py`
+
+You will have to make another **function** named 
+
+```
+def getkeys2():
+    with open("keys (2).txt", 'r') as f:
+        file = f.readlines()
+
+    length = len(file)
+
+    keys = ""
+    for i in range(0, length):
+        key = file[i][33 : 65]
+        kid = file[i][0 : 32]
+
+        keys += f'--key {kid}:{key} '
+        return keys
+```
+
+And then add another **except** block.
+
+```
+except:
+    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys2()} encrypted.m4a decrypted.m4a', shell=True)
+    subprocess.run(f'{mp4decryptexe} --show-progress {getkeys2()} encrypted.mp4 decrypted.mp4', shell=True)
+```
 
 # Running the Script
 
 Run `python webdl.py -h`
 
-Example code : `py webdl.py -o test`
+Check the instructions and enter the **mpd url** , output.
 
-### If you want to enter Your Own MPD URL -
-replace `mpd_url` key of **keys.json** file.
-
--id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.)
+Example code : `py webdl.py -m "mpdurl" -o test`
 
 ### Subtitle part is bugged right now.
 
