@@ -77,12 +77,6 @@ else:
     subprocess.run([mkvmergeexe, '--ui-language' ,'en', '--output', output +'.mkv', '--language', '0:eng', '--default-track', '0:yes', '--compression', '0:none', 'decrypted.mp4', '--language', '0:eng', '--default-track', '0:yes', '--compression' ,'0:none', 'decrypted.m4a','--language', '0:eng','--track-order', '0:0,1:0,2:0,3:0,4:0'])
     print("\nAll Done .....")    
 
-print("\nDo you want to delete keys.json : Press 1 for yes , 2 for no")
-delete_choice = int(input("Enter Response : "))
-
-if delete_choice == 1:
-    os.remove("keys.json")
-    
 print("\nDo you want to delete the Encrypted Files : Press 1 for yes , 2 for no")
 delete_choice = int(input("Enter Response : "))
 
