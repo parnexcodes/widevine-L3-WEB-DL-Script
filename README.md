@@ -42,8 +42,6 @@ replace `mpd_url` key of **keys.json** file.
 
 ### Subtitle part is bugged right now.
 
-![alt text](https://i.imgur.com/wc17Qjx.png "image")
-
 # Report Issues
 
 Open Issue on Github if you get any problem.
