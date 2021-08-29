@@ -3,45 +3,39 @@ This is a script created to WEB-DL L3 Widevine Content.
 
 Last Updated July 31, 2021.
 
-# Use the branch below if you aren't able to modify the code according to your needs
+## Use the branch below if you aren't able to modify the code according to your needs
 
 <https://github.com/parnexcodes/widevine-L3-WEB-DL-Script/tree/method-2>
 
 Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in this script).
 
-# Things Needed
+## How to use
+### Requirements
+* Python and pip
+* Widewine Key Gyesser
+  * Download zip from https://github.com/parnexcodes/widevine-l3-guesser-modified
+  * Activate developer mode in Chrome Extensions
+  * Use "Load unpacked" to load the extracted extension folder
+* pyfiglet
+  * `pip install pyfiglet`
+* rich
+  * `pip install rich`
 
-**Widevine Key Guesser** : <https://github.com/parnexcodes/widevine-l3-guesser-modified>
+### Get the keys
+Go to the protected stream you want to download. Activate the plugin (restart may be required after installing the extension) and download the extracted keys (keys.json).
 
-- `pip install pyfiglet`
-- `pip install rich`
+### Decode the video
+Download the widevine-L3-WEB-DL-Script from here (Code -> Download zip). Copy the downloaded keys.json file to the same folder.
 
-# How to use ?
+Run the downloader with `python webdl.py -o <name_without_extension>` from the folder you downloaded and extracted the script from.
 
-Load the extension (link above)
+The script will look in the keys.json file, starting from the second element in the JSON array. If the script can't find any keys, either modify the script (line 27 and 31), or the keys.json. See <https://gist.github.com/parnexcodes/74fef2e33a2171031000a97c371a1a65> for examples for some common use cases.
 
-Open the Widevine Protected DRM Stream , click on extension then click on **Download**.
+If there are multiple `mpd_url`s in the file and it isn't working, try changing them around. You can also change the `mpd_url` for a custom one if you have one.
 
-Place **keys.json** file inside this repo's folder.
+### Options
+-id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.). **Subtitle part is bugged right now**.
 
-# Note
-
-You might need to update line **27** or **31** for some sites.
-It's a simple logic , you can figure it out yourself. <https://gist.github.com/parnexcodes/74fef2e33a2171031000a97c371a1a65>
-
-# Running the Script
-
-Run `python webdl.py -h`
-
-Example code : `py webdl.py -o test`
-
-### If you want to enter Your Own MPD URL -
-replace `mpd_url` key of **keys.json** file.
-
--id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.)
-
-### Subtitle part is bugged right now.
-
-# Report Issues
+## Report Issues
 
 Open Issue on Github if you get any problem.
