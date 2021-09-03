@@ -12,7 +12,7 @@ Works well with .mpd files , for m3u8 please use n_m3u8 program (not included in
 ## How to use
 ### Requirements
 * Python and pip
-* Widewine Key Gyesser
+* Widevine Key Guesser
   * Download zip from https://github.com/parnexcodes/widevine-l3-guesser-modified
   * Activate developer mode in Chrome Extensions
   * Use "Load unpacked" to load the extracted extension folder
