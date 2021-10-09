@@ -86,7 +86,8 @@ else:
 
 if args.delenc:
     delete_choice = 1
-    os.remove(keyfile)
+    if os.path.isfile(output + ".mkv"):
+        os.remove(keyfile)
 else:
     print("\nDo you want to delete the Encrypted Files : Press 1 for yes , 2 for no")
     delete_choice = int(input("Enter Response : "))
