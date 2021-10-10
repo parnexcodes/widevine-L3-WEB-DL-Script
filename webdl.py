@@ -17,9 +17,16 @@ arguments = argparse.ArgumentParser()
 arguments.add_argument("-o", '--output', dest="output", help="Specify output file name with no extension", required=True)
 arguments.add_argument("-id", dest="id", action='store_true', help="use if you want to manually enter video and audio id.")
 arguments.add_argument("-s", dest="subtitle", help="enter subtitle url")
+arguments.add_argument("-k", dest="keyfile", action='store_true', help="Use keyfile with the same name as specified output")
+arguments.add_argument("-d", dest="delenc", action='store_true', help="Delete encoded AND JSON FILE upon completion")
 args = arguments.parse_args()
 
-with open("keys.json") as json_data:
+if args.keyfile:
+    keyfile = str(args.output) + ".json"
+else:
+    keyfile = "keys.json"
+
+with open(keyfile) as json_data:
     config = json.load(json_data)
     json_mpd_url = config[0]['mpd_url']
     try:
@@ -77,8 +84,13 @@ else:
     subprocess.run([mkvmergeexe, '--ui-language' ,'en', '--output', output +'.mkv', '--language', '0:eng', '--default-track', '0:yes', '--compression', '0:none', 'decrypted.mp4', '--language', '0:eng', '--default-track', '0:yes', '--compression' ,'0:none', 'decrypted.m4a','--language', '0:eng','--track-order', '0:0,1:0,2:0,3:0,4:0'])
     print("\nAll Done .....")    
 
-print("\nDo you want to delete the Encrypted Files : Press 1 for yes , 2 for no")
-delete_choice = int(input("Enter Response : "))
+if args.delenc:
+    delete_choice = 1
+    if os.path.isfile(output + ".mkv"):
+        os.remove(keyfile)
+else:
+    print("\nDo you want to delete the Encrypted Files : Press 1 for yes , 2 for no")
+    delete_choice = int(input("Enter Response : "))
 
 if delete_choice == 1:
     os.remove("encrypted.m4a")

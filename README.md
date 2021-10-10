@@ -34,7 +34,10 @@ The script will look in the keys.json file, starting from the second element in 
 If there are multiple `mpd_url`s in the file and it isn't working, try changing them around. You can also change the `mpd_url` for a custom one if you have one.
 
 ### Options
--id and -s are optional (**id** to manually enter video and audio id from ytdl, **s** for subtitle url.). **Subtitle part is bugged right now**.
+**-id** = Manually enter video and audio id from ytdl
+ **-s** = _Optional_ - For subtitle url (**Subtitle part is bugged right now**)
+ **-d** = _Optional_ Delete encoded AND JSON FILE upon completion
+ **-k** = _Optional_ Use keyfile with the same name as specified output
 
 ## Report Issues
 
