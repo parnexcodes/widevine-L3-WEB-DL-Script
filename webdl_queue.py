@@ -8,4 +8,4 @@ for f in files:
 
 print(jsonfiles)
 for x in jsonfiles:
-    os.system("python webdl.py -k -d -o " + x[:-5])
+    os.system('python webdl.py -k -d -o "' + x[:-5] + '"')
